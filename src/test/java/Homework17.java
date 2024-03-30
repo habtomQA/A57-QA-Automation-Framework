@@ -13,7 +13,7 @@ public class Homework17 extends BaseTest{
         clickLoginBtn();
         Thread.sleep(4000);
         searchSong("Dark");
-        Thread.sleep(2000);
+        Thread.sleep(4000);
         clickAddToBtn();
         Thread.sleep(4000);
         choosePlaylist();
@@ -46,21 +46,22 @@ public class Homework17 extends BaseTest{
     }
     public void clickAddToBtn(){
 
-        WebElement addToBtn = driver.findElement(By.xpath("//section[@id='songsWrapper']//button[@data-test='add-to-btn']"));
-        addToBtn.click();
+            WebElement addToBtn = driver.findElement(By.xpath("//section[@id='songsWrapper']//button[@data-test='add-to-btn']"));
+            addToBtn.click();
     }
     public void selectFirstSongResult(){
         WebElement firstSongInResult= driver.findElement(By.xpath("//section[@id='songResultsWrapper']//tr[@class='song-item'][1]"));
         firstSongInResult.click();
 
     }
-    public void clickViewAllBtn(){
-        WebElement viewAllBtn = driver.findElement(By.xpath("//button[@data-test='view-all-songs-btn']"));
-        viewAllBtn.click();
-    }
+
     public void searchSong(String songName){
         WebElement searchField = driver.findElement(By.cssSelector("div#searchForm input[type='search']"));
         searchField.clear();
         searchField.sendKeys(songName);
+    }
+    public void clickViewAllBtn(){
+        WebElement viewAllBtn = driver.findElement(By.xpath("//button[@data-test='view-all-songs-btn']"));
+        viewAllBtn.click();
     }
 }
