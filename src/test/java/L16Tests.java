@@ -73,7 +73,7 @@ public class L16Tests extends BaseTest{
 
     @Test
     public void loginValidEmailPassword(){
-        navigateToPage();
+
         provideEmail("demo@class.com");
         providePassword("te$t$tudent");
         clickLoginBtn();
@@ -87,7 +87,7 @@ public class L16Tests extends BaseTest{
 
     @Test
     public void loginInvalidEmailPassword(){
-        navigateToPage();
+
         provideEmail("invalidemail@class.com");
         providePassword("te$tStudent");
         clickLoginBtn();
