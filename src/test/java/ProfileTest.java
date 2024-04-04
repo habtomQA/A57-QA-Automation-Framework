@@ -3,50 +3,48 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.nio.channels.FileLockInterruptionException;
 import java.util.UUID;
 
 public class ProfileTest extends BaseTest{
     @Test
-    public void changeProfileName()throws InterruptedException {
-        //Login To Koel
+    public void changeProfileName() throws InterruptedException {
+        //login to koel
         provideEmail("demo@class.com");
         providePassword("te$t$tudent");
         clickLoginBtn();
         Thread.sleep(2000);
-        //click on avatar Icon to navigate to profile
+        //click on avatar icon to navigate to the profile
         clickOnAvatarIcon();
         Thread.sleep(2000);
-        //Generate a random name
-        String randomName=generateRandomName();
+        //generate a random Name for profile
+        String randomName = generateRandomName();
         System.out.println("Random name is: "+randomName);
-        //current password
+
+        //Provide current password
         provideCurrentPassword("te$t$tudent");
         Thread.sleep(2000);
-        //Provide new generated name
+        //provide new generated name
         provideProfileName(randomName);
         Thread.sleep(2000);
         //click on save button
         clickOnSaveBtn();
         Thread.sleep(2000);
-        //Assertion, actual Vs expected
-        WebElement actualProfileName=driver.findElement(By.cssSelector("a.view-profile>span"));
+        //Assertions (actual vs expected);
+        WebElement actualProfileName = driver.findElement(By.cssSelector("a.view-profile>span"));
         Thread.sleep(2000);
         Assert.assertEquals(actualProfileName.getText(),randomName);
-
-
     }
     public void clickOnAvatarIcon(){
         WebElement avatarIcon = driver.findElement(By.cssSelector("img.avatar"));
         avatarIcon.click();
     }
-
     public String generateRandomName(){
-        return UUID.randomUUID().toString().replace("_","");
-        //adkskldjsad23dmdj
+        return UUID.randomUUID().toString().replace("-","");//adkskldjsad23mdj}
+
+
     }
     public void provideCurrentPassword(String currentPassword){
-        WebElement profileName = driver.findElement(By.cssSelector("[name='current_password']"));
+        WebElement currentPasswordField = driver.findElement(By.cssSelector("[name='current_password']"));
         currentPasswordField.clear();
         currentPasswordField.sendKeys(currentPassword);
 
