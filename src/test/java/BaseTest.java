@@ -35,7 +35,7 @@ public class BaseTest {
     }
 
     public void clickSubmit() {
-        WebElement submit = driver.findElement(By.cssSelector("input[type='password']"));
+        WebElement submit = driver.findElement(By.cssSelector("button[type='submit']"));
         submit.click();
     }
 }
