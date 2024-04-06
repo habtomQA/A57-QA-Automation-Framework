@@ -22,6 +22,6 @@ test {
        // suites "src/test/resources/TestNG.xml"
       //  suites "src/test/resources/Homework18.xml"
 
-        suites "src/test/resources/SeleniumWait.xml"
+        suites "src/test/resources/TestNG.xml"
     }
 }

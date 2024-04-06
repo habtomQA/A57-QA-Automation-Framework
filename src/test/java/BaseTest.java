@@ -45,6 +45,7 @@ public class BaseTest {
     }
     void provideEmail(String email){
         WebElement emailField= wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[type='email']")));
+        //WebElement emailField= wait.until(ExpectedConditions.textToBePresentInElementLocated(By.cssSelector("input[type='email']"),"email"));
         //WebElement emailField = driver.findElement(By.cssSelector("input[type='email']"));
         emailField.clear();
         emailField.sendKeys(email);
