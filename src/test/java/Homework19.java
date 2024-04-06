@@ -7,7 +7,7 @@ public class Homework19 extends BaseTest{
         provideEmail("demo@class.com");
         providePassword("te$t$tudent");
         clickOnLoginBtn();
-        
+
 
     }
 }
