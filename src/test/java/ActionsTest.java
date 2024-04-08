@@ -1,4 +1,5 @@
 import org.openqa.selenium.By;
+<<<<<<< Updated upstream
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -12,11 +13,20 @@ public class ActionsTest extends BaseTest{
 
     //Test #1 contextual click
     //@Test
+=======
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.Assert;
+
+public class ActionsTest extends BaseTest{
+    //Test #1 contextual click
+>>>>>>> Stashed changes
     public void playSong() throws InterruptedException{
         //Background steps
         provideEmail("demo@class.com");
         providePassword("te$t$tudent");
         clickLoginBtn();
+<<<<<<< Updated upstream
         //chooseAllSongs
         chooseAllSongsList();
         Thread.sleep(5000);
@@ -127,4 +137,18 @@ public class ActionsTest extends BaseTest{
         return notification.getText();
     }
 
+=======
+        //Choose All Songs
+        chooseAllSongsList();
+        //Contextual click on the first song
+        contextClickFirstSong();
+        //Click on play from the menu
+        choosePlayOPtion();
+        Assert.assertTrue(isPlaying());
+
+    }
+    public void  chooseAllSongsList(){
+        Wait.until(ExpectedConditions.visibilityOfElementLocated(By.ByCssSelector()"li.a.song"))
+    }
+>>>>>>> Stashed changes
 }
