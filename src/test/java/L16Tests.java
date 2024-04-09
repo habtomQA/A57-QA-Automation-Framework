@@ -72,8 +72,8 @@ public class L16Tests extends BaseTest{
     }
 
     @Test
-    public void loginValidEmailPassword(){
-        navigateToPage();
+    public void loginValidEmailPassword(String email, String password){
+       // navigateToPage(String url);
         provideEmail("demo@class.com");
         providePassword("te$t$tudent");
         clickLoginBtn();
@@ -87,7 +87,7 @@ public class L16Tests extends BaseTest{
 
     @Test
     public void loginInvalidEmailPassword(){
-        navigateToPage();
+        //navigateToPage(String url);
         provideEmail("invalidemail@class.com");
         providePassword("te$tStudent");
         clickLoginBtn();
@@ -98,13 +98,13 @@ public class L16Tests extends BaseTest{
 
 
 
-    public void provideEmail(String email){
+  /*  public void provideEmail(String email){
         WebElement emailField = driver.findElement(By.cssSelector("input[type='email']"));
         emailField.clear();
         emailField.sendKeys(email);
     }
 
-    public void providePassword(String password){
+   /* public void providePassword(String password){
         WebElement passwordField = driver.findElement(By.cssSelector("input[type='password']"));
         passwordField.clear();
         passwordField.sendKeys(password);
@@ -118,6 +118,6 @@ public class L16Tests extends BaseTest{
     public void clickOnLoginBtn(){
         WebElement loginBtn = driver.findElement(By.cssSelector("button[type='submit']"));
         loginBtn.click();
-    }
+    }*/
 
 }

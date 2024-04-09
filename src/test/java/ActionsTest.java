@@ -66,7 +66,7 @@ public class ActionsTest extends BaseTest{
         actions.moveToElement(play).perform();
         return wait.until(ExpectedConditions.visibilityOf(play));
     }
-
+///////////////////////////////////////////////////////////////////////////////////////////
     //Test 3- WebElements (Count playlist)
     //@Test
     public void countSongsInPlaylist() {
