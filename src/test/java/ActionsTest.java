@@ -3,6 +3,7 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
@@ -14,7 +15,7 @@ public class ActionsTest extends BaseTest{
 
     //Test #1 contextual click
     //@Test
-    public void playSong() throws InterruptedException{
+    /*public void playSong() throws InterruptedException{
         //Background steps
         provideEmail("demo@class.com");
         providePassword("te$t$tudent");
@@ -103,7 +104,7 @@ public class ActionsTest extends BaseTest{
     //Test #4 Double click
 
     String newPlaylistName="Sample Edited Playlist";
-    @Test
+   // @Test
     public void renamePlaylist(){
         String updatedPlaylistMsg="Updated playlist \""+newPlaylistName+".\"";
         provideEmail("demo@class.com");
@@ -128,6 +129,45 @@ public class ActionsTest extends BaseTest{
         WebElement notification = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show")));
         return notification.getText();
     }
+   /* Actions actions= new Actions(driver);
+    actions.doubleClick();
+    public void doubleClickChoosePlaylist(){
+        WebElement playlistElement= driver.findElement(By.cssSelector(".playlist:nth-child(3)"));
+        actions.doubleClick(playlistElement).perform();
 
+        //or/////////////
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".playlist:nth-child(3)")));
+        actions.doubleClick(driver.findElement(By.cssSelector(".playlist:nth-child(3)"))).perform();
+
+
+
+    }
+
+    */
+@Test
+    public void playSong(){
+    providePassword("habtom.fesseha@testpro.io");
+    providePassword("Econ@99336");
+    clickLoginBtn();
+    chooseAllSongsList();
+    contextClickFirstSong();
+    choosePlayOption();
+    Assert.assertTrue(isSongPlaying());
+
+}
+public void chooseAllSongsList(){
+    wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("li a.songs")));
+}
+public void contextClickFirstSong(){
+    WebElement firstSongElement=wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".all-songs tr.song-item:nth-child(1)")));
+    actions.contextClick(firstSongElement).perform();
+}
+public void choosePlayOption(){
+    wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("li.playback")));
+}
+public boolean isSongPlaying(){
+    WebElement soundBarVisualizer=wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[data-testid='sound-bar-play']")));
+    return soundBarVisualizer.isDisplayed();
+}
 }
 
