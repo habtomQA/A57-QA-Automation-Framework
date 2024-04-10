@@ -239,8 +239,11 @@ public boolean isSongPlaying(){
         Assert.assertEquals(getRenamePlaylistSuccessMsg(), updatedPlaylistMsg);
     }
 public void doubleClickPlaylist(){
-        WebElement playlistElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".playlist:nth-child(3)")));
+        WebElement playlistElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".playlist:nth-child(4)")));
+
         actions.doubleClick(playlistElement).perform();;
+
+
 }
 public void enterNewPlaylistName(){
         WebElement playlistInputField= wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[name='name']")));
