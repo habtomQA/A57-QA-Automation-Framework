@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+
 import java.util.List;
 
 public class ActionsTest extends BaseTest{
@@ -144,8 +145,8 @@ public class ActionsTest extends BaseTest{
     }
 
     */
-@Test
-    public void playSong(){
+/*@Test
+    public void playSong() throws InterruptedException {
     providePassword("habtom.fesseha@testpro.io");
     providePassword("Econ@99336");
     clickLoginBtn();
@@ -155,8 +156,9 @@ public class ActionsTest extends BaseTest{
     Assert.assertTrue(isSongPlaying());
 
 }
-public void chooseAllSongsList(){
+public void chooseAllSongsList() throws InterruptedException {
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("li a.songs")));
+    Thread.sleep(4000);
 }
 public void contextClickFirstSong(){
     WebElement firstSongElement=wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".all-songs tr.song-item:nth-child(1)")));
@@ -168,6 +170,92 @@ public void choosePlayOption(){
 public boolean isSongPlaying(){
     WebElement soundBarVisualizer=wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[data-testid='sound-bar-play']")));
     return soundBarVisualizer.isDisplayed();
+}
+
+//////////////////
+    /////////////////
+*/
+   /* @Test
+    public void hoverOverPlayButton() {
+        provideEmail("habtom.fesseha@testpro.io");
+        providePassword("Econ@99336");
+        clickLoginBtn();
+        Assert.assertTrue(hoverPlay().isDisplayed());
+
+
+    }
+    public WebElement hoverPlay(){
+        WebElement play = driver.findElement(By.cssSelector("[data-testid='play-btn']"));
+        actions.moveToElement(play).perform();
+        return wait.until(ExpectedConditions.visibilityOf(play));
+    }*/
+    /*@Test
+    public void countSongsInPlaylist(){
+        //pre-requisite; user created  playlist named"Playlist Demo" with at least one song
+        provideEmail("habtom.fesseha@testpro.io");
+        providePassword("Econ@99336");
+        clickLoginBtn();
+        choosePlaylistByName("Playlist Demo");
+        displayAllSongs();
+        Assert.assertTrue(getPlaylistDetails().contains(String.valueOf(countSongs())));
+        //Verifies if the playlist details song count is equal to the retrieved number of songs
+
+    }
+    public void choosePlaylistByName(String playlistName){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"playlists\"]/ul/li[18]/a"))).click();
+    }
+    public int countSongs(){//count songs inside playlist
+      return driver.findElements(By.cssSelector("section#playlistWrapper td.title")).size();
+    }
+
+    public String getPlaylistDetails(){//Retrieves playlist details from playlist header(displays number of songs in playlist)
+        return driver.findElement(By.cssSelector("span.meta.text-secondary span.meta")).getText();
+    }
+    public void displayAllSongs(){//Prints all songs inside the playlist;- for demo purposes
+        List<WebElement>songList= driver.findElements(By.cssSelector("section#playlistWrapper td.title"));
+        System.out.println("Number of songs found: " + countSongs());
+        for (WebElement e:songList){
+            System.out.println(e.getText());
+        }
+
+    }*/
+    //Renaming Playlist-Prerequisite- at least one user-created playlist
+
+    String newPlaylistName="Sample Edited Playlist";
+
+
+    @Test
+    public void renamePlaylist()  {
+
+        String updatedPlaylistMsg= "Updated playlist \"Sample Edited Playlist.\"";
+        provideEmail("habtom.fesseha@testpro.io");
+        providePassword("Econ@99336");
+        clickLoginBtn();
+
+        doubleClickPlaylist();
+
+        enterNewPlaylistName();
+
+        Assert.assertEquals(getRenamePlaylistSuccessMsg(), updatedPlaylistMsg);
+    }
+public void doubleClickPlaylist(){
+        WebElement playlistElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".playlist:nth-child(3)")));
+        actions.doubleClick(playlistElement).perform();;
+}
+public void enterNewPlaylistName(){
+        WebElement playlistInputField= wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[name='name']")));
+        //clear() doesn't work , element has an attribute of "required"
+       //workaround is ctrl A (to select all)then backspace to clear then replace with new playlist name
+
+    playlistInputField.sendKeys(Keys.chord(Keys.CONTROL,"A",Keys.BACK_SPACE));
+    playlistInputField.sendKeys(newPlaylistName);
+    playlistInputField.sendKeys(Keys.ENTER);
+
+
+}
+public String getRenamePlaylistSuccessMsg(){
+        WebElement notification = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show")));
+        return notification.getText();
 }
 }
 

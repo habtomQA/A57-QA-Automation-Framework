@@ -20,7 +20,6 @@ public class BaseTest {
     public WebDriverWait wait=null;
     public Actions actions =null;
     public String url="https://qa.koel.app/";
-
     @BeforeSuite
    static void setupClass() {
         WebDriverManager.chromedriver().setup();
