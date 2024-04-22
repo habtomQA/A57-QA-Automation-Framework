@@ -7,37 +7,51 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Parameters;
 
 import java.time.Duration;
 
-import static org.bouncycastle.cms.RecipientId.password;
-
 public class BaseTest {
-    public WebDriver driver;
-    public String url= "https://qa.koel.app/";
+    protected WebDriver driver=null;
 
 
+
+//Setting up WebDriverManager for chrome before the test suite runs
     @BeforeSuite
     static void setupClass() {
         WebDriverManager.chromedriver().setup();
     }
+    //Method to set up WebDriver with chrome options before each test method.
 @BeforeMethod
-public void launchBrowser(){
+@Parameters("baseUrl")
+public void launchBrowser(String baseUrl){
+        //Configuring chrome options for local testing
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
+        options.addArguments("--disable-notifications","--incognito","--start-maximized","-lang=en","--remote-allow-origins=*");
 
         driver=new ChromeDriver(options);
+        //configuring implicit wait for the driver and navigating to the specified URL.
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
-        navigateToPage();
+        navigateToPage(baseUrl);
 
 }
-    public void navigateToPage() {
-        driver.get(url);
+    public void navigateToPage(String baseUrl) {
+        driver.get(baseUrl);
 
     }
+    //Method for performing login action with provided email and password.
+    public void login(String email, String password){
+        //Locating email, password, and login button elements and performing login action.
+        WebElement emailInput = driver.findElement(By.cssSelector("[type='email']"));
+        WebElement passwordInput = driver.findElement(By.cssSelector("[type='password']"));
+        WebElement loginButton = driver.findElement(By.cssSelector("[type='submit']"));
+        emailInput.sendKeys(email);
+        passwordInput.sendKeys(password);
+        loginButton.click();
+    }
 
-    public void provideEmail(String email) {
+    /*public void provideEmail(String email) {
         WebElement emailField = driver.findElement(By.cssSelector("input[type='email']"));
         emailField.clear();
         emailField.sendKeys(email);
@@ -52,7 +66,7 @@ public void launchBrowser(){
     public void clickSubmit() {
         WebElement submit = driver.findElement(By.cssSelector("button[type='submit']"));
         submit.click();
-    }
+    }*/
     @AfterMethod
     public void closeBrowser(){
         driver.quit();
